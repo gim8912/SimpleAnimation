@@ -139,10 +139,9 @@ function trainClick() {
 		//	When the tween starts it will take the sprites current X value and add +300 to it.
 		game.add.tween(train).to( { x: '-3600' }, 2000, Phaser.Easing.Linear.None, true);	
 	}
-	if(train.x === -600){
-		train.x=3840;
-		game.add.tween(train).to( { x: '-840' }, 3000, Phaser.Easing.Linear.None, true);
-	}
+	train.x=3840;
+	game.add.tween(train).to( { x: '-840' }, 3000, Phaser.Easing.Linear.None, true);
+	
 
 }
 
