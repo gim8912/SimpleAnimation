@@ -93,7 +93,7 @@ function create() {
 	windmill.animations.play('spin', 10, true);
 }
 function update() {
-	screenWrap(train);
+	train.forEachExists(screenWrap, this);
 }
 function cowClick() {
 	cow.animations.play('walk', 10, false);	
@@ -138,7 +138,7 @@ function trainClick() {
 		//	Here you'll notice we are using a relative value for the tween.
 		//	You can specify a number as a string with either + or - at the start of it.
 		//	When the tween starts it will take the sprites current X value and add +300 to it.
-		game.add.tween(train).to( { x: '-3553' }, 2000, Phaser.Easing.Linear.None, true);
+		game.add.tween(train).to( { x: '-4000' }, 2000, Phaser.Easing.Linear.None, true);
 		
 	}
 
