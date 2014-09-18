@@ -93,7 +93,7 @@ function create() {
 	windmill.animations.play('spin', 10, true);
 }
 function update() {
-	trains.forEachExists(screenWrap, this);
+	screenWarp(train);
 }
 function cowClick() {
 	cow.animations.play('walk', 10, false);	
