@@ -25,8 +25,19 @@ function preload() {
 	game.load.image('house02', 'assets/house02.png');
 	//
 }
-
-tractor = game.add.sprite(1000, 1050, 'tractor'); //트렉터
+function create() {
+	// 기본 배경
+	bg= game.add.sprite(0,0, 'bg');	
+	
+	//강승화 생성
+	house01= game.add.sprite(1323,999, 'house01');
+	house02= game.add.sprite(2472,921, 'house02');
+	cow = game.add.sprite(600, 1000, 'cow');
+	cow.animations.add('walk');
+	cow.inputEnabled = true;
+	cow.events.onInputDown.add(cowClick, this);
+	
+    tractor = game.add.sprite(1000, 1050, 'tractor'); //트렉터
 	tractor.animations.add('walk');
 	tractor.inputEnabled = true;
 	tractor.events.onInputDown.add(tractorClick, this);
