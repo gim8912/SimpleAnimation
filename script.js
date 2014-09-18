@@ -1,12 +1,13 @@
-var game = new Phaser.Game(1920, 1080, Phaser.AUTO, '', {preload: preload, create: create});
+var game = new Phaser.Game((3840, 2160, Phaser.AUTO, '', {preload: preload, create: create});
 var cow;
 
 function preload() {
 	game.load.spritesheet('cow', 'assets/cow.png',100 , 50);
-	game.load.spritesheet('map', 'assets/map.png',1980 , 1080);
+	game.load.spritesheet('bg', 'assets/bg.jpg');
 }
 
 function create() {
+	bg = game.add.sprite(0,0, 'bg')
 	cow = game.add.sprite(100, 100, 'cow');
 	cow.animations.add('walk');
 	cow.inputEnabled = true;
