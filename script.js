@@ -94,11 +94,11 @@ function create() {
 }
 function update() {	
 
-	if(train === -600){
+	if(train.x === -600){
 		train.x=3840;
 		game.add.tween(train).to( { x: '-840' }, 3000, Phaser.Easing.Linear.None, true);
 	}
-}
+y}
 function cowClick() {
 	cow.animations.play('walk', 10, false);	
 }
