@@ -132,9 +132,35 @@ function treeClick() {
 }
 function trainClick() {
 	train.animations.play('shiny', 8, false);
+	if (train.x === 3000)
+	{
+		//	Here you'll notice we are using a relative value for the tween.
+		//	You can specify a number as a string with either + or - at the start of it.
+		//	When the tween starts it will take the sprites current X value and add +300 to it.
+
+		game.add.tween(train).to( { x: '-2300' }, 2000, Phaser.Easing.Linear.None, true);
+	}
+	else if (train.x === 700)
+	{
+		game.add.tween(train).to( { x: '+2300' }, 2000, Phaser.Easing.Linear.None, true);
+	}
 }
+
+	
+
+
 
 //신창무 함수
 function parsil5Click() {
   parasol3.animations.play('walk', 10, false);
 }
+
+//주란 함수
+
+
+//트윈애니메이션(왔다갔다)
+  //birds[0].wander = game.add.tween(birds[0])
+  //.to({ x: 000, y: 1380}, 2000, phaser.Easing.Linear.None)
+  //.to({ x: 000, y: 1380}, 2000, phaser.Easing.Linear.None)
+  //.loop()
+  //.start();
