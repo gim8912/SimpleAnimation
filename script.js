@@ -158,7 +158,7 @@ function parsil5Click() {
 
 
 //승훈 함수
-function screenWrap (sprite) { 되돌리기
+function screenWrap (sprite) { //되돌리기
     if (sprite.x < 0)
     {
         sprite.x = game.width;
