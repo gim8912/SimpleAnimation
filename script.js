@@ -11,19 +11,33 @@ var tree;
 var train;
 var house01;
 
+//// 신창무
+var parasol3
+
+//// 주란
+var streetlamp;
+var windmill;
+
+
 function preload() {
 	game.load.spritesheet('cow', 'assets/cow.png',100 , 50);
 	game.load.image('bg', 'assets/bg.jpg');
 	
-	//강승화
-	game.load.spritesheet('tractor', 'assets/tractor.png', 82/*width*/,110/*height*/);
-	game.load.spritesheet('bird', 'assets/bird01.png', 86/*width*/,109/*height*/);
-	game.load.spritesheet('lift', 'assets/lift.png', 56/*width*/,40/*height*/);
-	game.load.spritesheet('tree', 'assets/tree01.png', 184/*width*/,159/*height*/);
-	game.load.spritesheet('train', 'assets/train.png', 551/*width*/,72/*height*/);
+	//강승화 프리로드
+	game.load.spritesheet('tractor', 'assets/tractor.png', 82,110);
+	game.load.spritesheet('bird', 'assets/bird01.png', 86,109);
+	game.load.spritesheet('lift', 'assets/lift.png', 56,40);
+	game.load.spritesheet('tree', 'assets/tree01.png', 184,159);
+	game.load.spritesheet('train', 'assets/train.png', 551,72);
 	game.load.image('house01', 'assets/house01.png');
 	game.load.image('house02', 'assets/house02.png');
-	//
+	//신창무 프리로드
+	game.load.spritesheet('parasol3', 'assets/parasol3.png', 300, 300);
+	
+	//주란 프리로드
+	game.load.spritesheet('streetlamp', 'assets/streetlamp.png', 39, 204);
+	game.load.spritesheet('windmill', 'assets/windmill.png', 176, 201);
+	
 }
 function create() {
 	// 기본 배경
@@ -44,7 +58,7 @@ function create() {
 
 	bird = game.add.sprite(790,1330, 'bird');
 	bird.animations.add('fly');
-	bird.animations.play('fly', 10/*속도조절*/, true);
+	bird.animations.play('fly', 10, true);
 	//bird.inputEnabled = true;
 	//bird.events.onInputDown.add(birdClick, this);
 
@@ -62,13 +76,29 @@ function create() {
 	train.animations.add('shiny');
 	train.inputEnabled = true;
 	train.events.onInputDown.add(trainClick, this);
+	
+	//신창무 생성
+	parasol3= game.add.sprite(3000, 1500, 'parasol3');
+	parasol3.animations.add('walk');
+	parasol3.inputEnabled = true;
+	parasol3.events.onInputDown.add(parsil5Click, this);
+	
+	//주란 생성
+	streetlamp = game.add.sprite(300,100, 'streetlamp');
+	streetlamp.animations.add('lamp');
+	streetlamp.animations.play('lamp', 5, true);
+
+	windmill = game.add.sprite(400,100, 'windmill');
+	windmill.animations.add('spin');
+	windmill.animations.play('spin', 10, true);
+
 
 }
 function cowClick() {
 	cow.animations.play('walk', 10, false);	
 }
 
-//강승화
+//강승화 함수
 function tractorClick() {
 	tractor.animations.play('walk', 7, false);
 }
@@ -102,4 +132,9 @@ function treeClick() {
 }
 function trainClick() {
 	train.animations.play('shiny', 8, false);
+}
+
+//신창무 함수
+function parsil5Click() {
+  parasol3.animations.play('walk', 10, false);
 }
