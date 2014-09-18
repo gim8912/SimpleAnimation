@@ -3,6 +3,7 @@ var cow;
 
 function preload() {
 	game.load.spritesheet('cow', 'assets/cow.png',100 , 50);
+	game.load.spritesheet('map', 'assets/map.png',1980 , 1080);
 }
 
 function create() {
