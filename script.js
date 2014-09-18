@@ -138,12 +138,12 @@ function trainClick() {
 		//	You can specify a number as a string with either + or - at the start of it.
 		//	When the tween starts it will take the sprites current X value and add +300 to it.
 
-		game.add.tween(train).to( { x: '-2300' }, 2000, Phaser.Easing.Linear.None, true);
+		game.add.tween(train).to( { x: '-3000' }, 2000, Phaser.Easing.Linear.None, true);
+		if(train.x === 0){
+			screenWrap(train);
+		}
 	}
-	else if (train.x === 700)
-	{
-		game.add.tween(train).to( { x: '+2300' }, 2000, Phaser.Easing.Linear.None, true);
-	}
+
 }
 
 	
@@ -158,6 +158,27 @@ function parsil5Click() {
 //주란 함수
 
 
+
+//승훈 함수
+function screenWrap (sprite) { 되돌리기
+    if (sprite.x < 0)
+    {
+        sprite.x = game.width;
+    }
+    else if (sprite.x > game.width)
+    {
+        sprite.x = 0;
+    }
+
+    if (sprite.y < 0)
+    {
+        sprite.y = game.height;
+    }
+    else if (sprite.y > game.height)
+    {
+        sprite.y = 0;
+    }
+}
 //트윈애니메이션(왔다갔다)
   //birds[0].wander = game.add.tween(birds[0])
   //.to({ x: 000, y: 1380}, 2000, phaser.Easing.Linear.None)
