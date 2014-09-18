@@ -137,14 +137,11 @@ function trainClick() {
 		//	Here you'll notice we are using a relative value for the tween.
 		//	You can specify a number as a string with either + or - at the start of it.
 		//	When the tween starts it will take the sprites current X value and add +300 to it.
-		game.add.tween(train).to( { x: '-3600' }, 2000, Phaser.Easing.Linear.None, true);
-		
-			if(train.x <= -500){
-				train.x=3840;
-				game.add.tween(train).to( { x: '-840' }, 2000, Phaser.Easing.Linear.None, true);
-			}
-			
-		
+		game.add.tween(train).to( { x: '-3600' }, 2000, Phaser.Easing.Linear.None, true);	
+	}
+	if(train.x === -600){
+		train.x=3840;
+		game.add.tween(train).to( { x: '-840' }, 3000, Phaser.Easing.Linear.None, true);
 	}
 
 }
