@@ -93,6 +93,11 @@ function create() {
 	windmill.animations.play('spin', 10, true);
 }
 function update() {	
+
+	if(train === -600){
+		train.x=3840;
+		game.add.tween(train).to( { x: '-840' }, 3000, Phaser.Easing.Linear.None, true);
+	}
 }
 function cowClick() {
 	cow.animations.play('walk', 10, false);	
@@ -139,8 +144,7 @@ function trainClick() {
 		//	When the tween starts it will take the sprites current X value and add +300 to it.
 		game.add.tween(train).to( { x: '-3600' }, 2000, Phaser.Easing.Linear.None, true);	
 	}
-	train.x=3840;
-	game.add.tween(train).to( { x: '-840' }, 3000, Phaser.Easing.Linear.None, true);
+	
 	
 
 }
