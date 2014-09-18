@@ -96,7 +96,7 @@ function update() {
 
 	if(train.x === -600){
 		train.x=3840;
-		game.add.tween(train).to( { x: '-840' }, 3000, Phaser.Easing.Linear.None, true);
+		game.add.tween(train).to( { x: '-840' }, 5000, Phaser.Easing.Linear.None, true);
 	}
 }
 function cowClick() {
