@@ -27,8 +27,8 @@ function preload() {
 	game.load.spritesheet('tractor', 'assets/tractor.png', 82,110);
 	game.load.spritesheet('bird', 'assets/bird01.png', 86,109);
 	game.load.spritesheet('lift', 'assets/lift.png', 56,40);
-	game.load.spritesheet('tree', 'assets/tree01.png', 184,159);
 	game.load.spritesheet('train', 'assets/train.png', 551,72);
+	game.load.spritesheet('tree', 'assets/tree01.png', 184,159);
 	game.load.image('house01', 'assets/house01.png');
 	game.load.image('house02', 'assets/house02.png');
 	//신창무 프리로드
