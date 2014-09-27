@@ -1,64 +1,113 @@
 var game = new Phaser.Game(3840, 2160, Phaser.AUTO, '',
           {preload: preload, create: create, update: update});
 var bg;
+var bg01;
+var bg02;
 var cow;
 
 //// 강승화
+
 var tractor;
-var bird;
+var birds = [];
 var lift;
 var tree;
 var train;
 var house01;
+var crane;
 
 //// 신창무
 var parasol3
 
 //// 주란
-var streetlamp;
+var streetlamp = [];
 var windmill;
+var seesaw;
+var circle;
+var trapeze;
+var clock_tower;
+var airballoon;
 
 
 function preload() {
 	game.load.spritesheet('cow', 'assets/cow.png',100 , 50);
-	game.load.image('bg', 'assets/bg.jpg');
+	game.load.image('bg02', 'assets/bg02.png');
+	game.load.image('bg01', 'assets/bg01.png');
+	
 	
 	//강승화 프리로드
 	game.load.spritesheet('tractor', 'assets/tractor.png', 82,110);
 	game.load.spritesheet('bird', 'assets/bird01.png', 86,109);
 	game.load.spritesheet('lift', 'assets/lift.png', 56,40);
-	game.load.spritesheet('train', 'assets/train.png', 551,72);
 	game.load.spritesheet('tree', 'assets/tree01.png', 184,159);
+	game.load.spritesheet('train', 'assets/train.png', 551,72);
 	game.load.image('house01', 'assets/house01.png');
 	game.load.image('house02', 'assets/house02.png');
+	game.load.spritesheet('crane', 'assets/crane.png', 309/*width*/,318/*height*/);
 	//신창무 프리로드
 	game.load.spritesheet('parasol3', 'assets/parasol3.png', 300, 300);
 	
 	//주란 프리로드
 	game.load.spritesheet('streetlamp', 'assets/streetlamp.png', 39, 204);
 	game.load.spritesheet('windmill', 'assets/windmill.png', 176, 201);
+	 // 주란 추가 이미지
+	game.load.spritesheet('cow2', 'assets/cow2.png', 84, 45);
+	game.load.spritesheet('circle', 'assets/circle.png', 106, 126);
+	game.load.spritesheet('seesaw', 'assets/seesaw.png', 77, 103);
+	game.load.spritesheet('trapeze', 'assets/trapeze.png', 321, 112);
+	game.load.spritesheet('clock_tower', 'assets/clock_tower.png', 66, 215);
+	game.load.spritesheet('airballoon', 'assets/airballoon.png', 310, 540);
+	game.load.spritesheet('truck', 'assets/truck.png', 120, 65);
 	
 }
 function create() {
 	// 기본 배경
-	bg= game.add.sprite(0,0, 'bg');	
+	bg= game.add.sprite(0,0, 'bg01');	
+	
 	
 	//강승화 생성
+
+	train = game.add.sprite(3000, 440, 'train'); //기차
+	train.animations.add('shiny');
+	train.inputEnabled = true;
+	train.events.onInputDown.add(trainClick, this);
+
+	truck = game.add.sprite(1544,1324, 'truck'); // 트럭
+	truck.animations.add('truck_drive');
+	truck.inputEnabled = true;
+	truck.events.onInputDown.add(truckClick, this);
+
+	bg= game.add.sprite(0,0, 'bg02'); // 트럭과 기차를 위한 이미지
+
 	house01= game.add.sprite(1323,999, 'house01');
 	house02= game.add.sprite(2472,921, 'house02');
-	cow = game.add.sprite(600, 1000, 'cow');
-	cow.animations.add('walk');
-	cow.inputEnabled = true;
-	cow.events.onInputDown.add(cowClick, this);
 	
-    tractor = game.add.sprite(1000, 1050, 'tractor'); //트렉터
-	tractor.animations.add('walk');
+	tractor = game.add.sprite(900, 1080, 'tractor'); // 트렉터
+	tractor.animations.add('move', [0, 1, 2, 3, 4, 5, 6], 11/*속도*/, true, true);
+	tractor.moveAnim = tractor.animations.add('move2');
+	var moveCompleted = function() {
+	    tractor.animations.play('move');
+	}
+	tractor.moveAnim.onComplete.add(moveCompleted, this);
 	tractor.inputEnabled = true;
 	tractor.events.onInputDown.add(tractorClick, this);
+	tractor.animations.play('move');
 
-	bird = game.add.sprite(790,1330, 'bird');
-	bird.animations.add('fly');
-	bird.animations.play('fly', 10, true);
+
+	birds[0] = game.add.sprite(790,1330, 'bird');
+	birds[0].animations.add('fly');
+	birds[0].animations.play('fly', 10/*속도조절*/, true);
+	//bird.inputEnabled = true;
+	//bird.events.onInputDown.add(birdClick, this);
+
+	birds[1] = game.add.sprite(900,1000, 'bird');
+	birds[1].animations.add('fly');
+	birds[1].animations.play('fly', 10/*속도조절*/, true);
+	//bird.inputEnabled = true;
+	//bird.events.onInputDown.add(birdClick, this);
+
+	birds[2] = game.add.sprite(400,1500, 'bird');
+	birds[2].animations.add('fly');
+	birds[2].animations.play('fly', 10/*속도조절*/, true);
 	//bird.inputEnabled = true;
 	//bird.events.onInputDown.add(birdClick, this);
 
@@ -67,15 +116,43 @@ function create() {
 	lift.inputEnabled = true;
 	lift.events.onInputDown.add(liftClick, this);
 
-	tree = game.add.sprite(300, 1050, 'tree'); //나무
-	tree.animations.add('cut');
+	tree = game.add.sprite(300, 1050, 'tree');
+	tree.animations.add('swing', [0, 1, 2, 3, 4, 5, 6, 7], 12, true, true);
+	tree.cutAnim = tree.animations.add('cut');
+	var cutCompleted = function() {
+	    tree.animations.play('swing');
+	}
+	tree.cutAnim.onComplete.add(cutCompleted, this);
 	tree.inputEnabled = true;
 	tree.events.onInputDown.add(treeClick, this);
+	tree.animations.play('swing');
+	
+	crane = game.add.sprite(1150, 450, 'crane'); //크레인
+	crane.animations.add('moving', [0, 1, 2, 3, 4, 5, 6,7,8,9,10,11,12,13,14,15,16], 10/*속도*/, true, true);
+	crane.movingAnim = crane.animations.add('moving2');
+	var movingCompleted = function() {
+	    crane.animations.play('moving');
+	}
+	crane.movingAnim.onComplete.add(movingCompleted, this);
+	crane.inputEnabled = true;
+	crane.events.onInputDown.add(craneClick, this);
+	crane.animations.play('moving');
 
-	train = game.add.sprite(3000, 440, 'train'); //기차
-	train.animations.add('shiny');
-	train.inputEnabled = true;
-	train.events.onInputDown.add(trainClick, this);
+	birds[0].wander = game.add.tween(birds[0])
+		.to({ x: 890, y: 1380 }, 2000, Phaser.Easing.Linear.None)
+		.to({ x: 790, y: 1330 }, 2000, Phaser.Easing.Linear.None);
+
+	tractor.wander = game.add.tween(tractor)
+		.to({ x: 1180, y: 980 }, 2000, Phaser.Easing.Linear.None)
+		.to({ x: 950, y: 980 }, 2000, Phaser.Easing.Linear.None)
+		.to({ x: 1180, y: 1060 }, 2000, Phaser.Easing.Linear.None)
+		.to({ x: 900, y: 1060 }, 2000, Phaser.Easing.Linear.None)
+		.to({ x: 1180, y: 1120 }, 2000, Phaser.Easing.Linear.None)
+		.to({ x: 800, y: 1120 }, 2000, Phaser.Easing.Linear.None)
+		.to({ x: 1180, y: 1200 }, 2000, Phaser.Easing.Linear.None)
+		.to({ x: 900, y: 1200 }, 2000, Phaser.Easing.Linear.None)
+		.to({ x: 900, y: 1080 }, 2000, Phaser.Easing.Linear.None);
+
 	
 	//신창무 생성
 	parasol3= game.add.sprite(3000, 1500, 'parasol3');
@@ -84,13 +161,55 @@ function create() {
 	parasol3.events.onInputDown.add(parsil5Click, this);
 	
 	//주란 생성
-	streetlamp = game.add.sprite(300,100, 'streetlamp');
-	streetlamp.animations.add('lamp');
-	streetlamp.animations.play('lamp', 5, true);
+	cow = game.add.sprite(1948,640, 'cow');
+	cow.animations.add('eat', [0,1,2,3,4,5], 9, true, true );
+	cow.walkAnim = cow.animations.add('walk',[6,7,8,9],9,true,true);
+	var walkCompleted = function(){
+		cow.animations.play('eat');
+	}
+	cow.walkAnim.onComplete.add(walkCompleted, this);
 
-	windmill = game.add.sprite(400,100, 'windmill');
+	cow.inputEnabled = true;
+	cow.events.onInputDown.add(cowClick0, this);
+	cow.animations.play('eat');
+	cow2 = game.add.sprite(1960,708, 'cow2');
+
+	streetlamp[0] = game.add.sprite(2908,746, 'streetlamp');
+	streetlamp[0].animations.add('lamp');
+	streetlamp[0].animations.play('lamp', 5, true);
+
+	windmill = game.add.sprite(2036,400, 'windmill');
 	windmill.animations.add('spin');
-	windmill.animations.play('spin', 10, true);
+	windmill.animations.play('spin', 5, true);
+
+	/*추가 이미지*/
+	circle = game.add.sprite(3242,584, 'circle');
+	circle.animations.add('circle_play');
+	circle.inputEnabled = true;
+	circle.events.onInputDown.add(circleClick, this);
+	
+	seesaw = game.add.sprite(3730,620, 'seesaw');
+	seesaw.animations.add('seesaw_play');
+	seesaw.inputEnabled = true;
+	seesaw.events.onInputDown.add(seesawClick, this);	
+	
+	trapeze = game.add.sprite(3400,574, 'trapeze');
+	trapeze.animations.add('trapeze_play');
+	trapeze.inputEnabled = true;
+	trapeze.events.onInputDown.add(trapezeClick, this);
+
+
+	clock_tower = game.add.sprite(3210,1096, 'clock_tower');
+	clock_tower.animations.add('clock_run');
+	clock_tower.inputEnabled = true;
+	clock_tower.events.onInputDown.add(clock_towerClick, this);
+	
+
+	airballoon = game.add.sprite(3342,680, 'airballoon');
+	airballoon.animations.add('airballoon_play');
+	airballoon.inputEnabled = true;
+	airballoon.events.onInputDown.add(airballoonClick, this);
+
 }
 function update() {	
 
@@ -98,13 +217,19 @@ function update() {
 		train.x=3840;
 		game.add.tween(train).to( { x: '-840' }, 1000, Phaser.Easing.Linear.None, true);
 	}
+	if(truck.x === -200){
+		truck.x=3840;
+		game.add.tween(truck).to( { x: '-2296' }, 4000, Phaser.Easing.Linear.None, true);
+	}
 }
 function cowClick() {
 	cow.animations.play('walk', 10, false);	
+
 }
 
 //강승화 함수
 function tractorClick() {
+	
 	tractor.animations.play('walk', 7, false);
 }
 /*
@@ -139,16 +264,19 @@ function trainClick() {
 	train.animations.play('shiny', 8, false);
 	if (train.x === 3000)
 	{
-		//	Here you'll notice we are using a relative value for the tween.
-		//	You can specify a number as a string with either + or - at the start of it.
-		//	When the tween starts it will take the sprites current X value and add +300 to it.
 		game.add.tween(train).to( { x: '-3600' }, 2000, Phaser.Easing.Linear.None, true);	
 	}
-	
-	
-
 }
+function tractorClick() {
+	tractor.animations.play('move2', 13, false);
 
+	tractor.wander.start();
+}
+function craneClick() {
+	crane.animations.play('moving2', 10, false);
+
+	//crane.wander.start();
+}
 	
 
 
@@ -159,7 +287,33 @@ function parsil5Click() {
 }
 
 //주란 함수
+function cowClick0() {
+	birds[0].wander.start();
+	cow.animations.play('walk',6,false);
+}
+function seesawClick() {
+	seesaw.animations.play('seesaw_play',16,false);
+}
+function circleClick() {
+	circle.animations.play('circle_play',6,true);
+}
+function trapezeClick() {
+	trapeze.animations.play('trapeze_play',16,false);
+}
+function airballoonClick() {
+	airballoon.animations.play('airballoon_play',16,false);
+}
+function clock_towerClick() {
+	clock_tower.animations.play('clock_run', 26, false);
+}
 
+function truckClick() {
+	truck.animations.play('truck_drive', 8, true);
+	if (truck.x === 1544)
+	{
+		game.add.tween(truck).to( { x: '-1744' }, 2000, Phaser.Easing.Linear.None, true);	
+	}
+}
 
 
 //승훈 함수
