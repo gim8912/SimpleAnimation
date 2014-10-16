@@ -86,19 +86,19 @@ function create() {
 	
 	//강승화 생성
 
-	sea = game.add.sprite(0,1491, 'sea');
-	//sea.animations.add('searun');
-	//sea.animations.play('searun', 7, true);
+	//sea = game.add.sprite(0,1491, 'sea');
+	sea.animations.add('searun');
+	sea.animations.play('searun', 7, true);
 
 	farm= game.add.sprite(738,1041, 'farm');
 	
 
-	train = game.add.sprite(3000, 440, 'train'); //기차
+	//train = game.add.sprite(3000, 440, 'train'); //기차
 	train.animations.add('shiny');
 	train.inputEnabled = true;
 	train.events.onInputDown.add(trainClick, this);
 
-	truck = game.add.sprite(1544,1324, 'truck'); // 트럭
+	//truck = game.add.sprite(1544,1324, 'truck'); // 트럭
 	truck.animations.add('truck_drive');
 	truck.inputEnabled = true;
 	truck.events.onInputDown.add(truckClick, this);
@@ -108,8 +108,8 @@ function create() {
 	house01= game.add.sprite(1323,999, 'house01');
 	house02= game.add.sprite(2472,921, 'house02');
 	
-	tractor = game.add.sprite(900, 1080, 'tractor'); // 트렉터
-	//tractor.animations.add('move', [0, 1, 2, 3, 4, 5, 6], 11/*속도*/, true, true);
+	//tractor = game.add.sprite(900, 1080, 'tractor'); // 트렉터
+	tractor.animations.add('move', [0, 1, 2, 3, 4, 5, 6], 11/*속도*/, true, true);
 	tractor.moveAnim = tractor.animations.add('move2');
 	var moveCompleted = function() {
 	    tractor.animations.play('move');
@@ -120,23 +120,23 @@ function create() {
 	tractor.animations.play('move');
 
 
-	birds[0] = game.add.sprite(790,1330, 'bird');
-	//birds[0].animations.add('fly');
-	//birds[0].animations.play('fly', 10/*속도조절*/, true);
+	//birds[0] = game.add.sprite(790,1330, 'bird');
+	birds[0].animations.add('fly');
+	birds[0].animations.play('fly', 10/*속도조절*/, true);
 	
 	//bird.inputEnabled = true;
 	//bird.events.onInputDown.add(birdClick, this);
 
-	birds[1] = game.add.sprite(900,1000, 'bird');
-	//birds[1].animations.add('fly');
-	//birds[1].animations.play('fly', 10/*속도조절*/, true);
+	//birds[1] = game.add.sprite(900,1000, 'bird');
+	birds[1].animations.add('fly');
+	birds[1].animations.play('fly', 10/*속도조절*/, true);
 	
 	//bird.inputEnabled = true;
 	//bird.events.onInputDown.add(birdClick, this);
 
 	birds[2] = game.add.sprite(400,1500, 'bird');
-//	birds[2].animations.add('fly');
-//	birds[2].animations.play('fly', 10/*속도조절*/, true);
+	birds[2].animations.add('fly');
+	birds[2].animations.play('fly', 10/*속도조절*/, true);
 	//bird.inputEnabled = true;
 	//bird.events.onInputDown.add(birdClick, this);
 
@@ -146,7 +146,7 @@ function create() {
 	lift.events.onInputDown.add(liftClick, this);
 
 	tree = game.add.sprite(300, 1050, 'tree');
-	//tree.animations.add('swing', [0, 1, 2, 3, 4, 5, 6, 7], 12, true, true);
+	tree.animations.add('swing', [0, 1, 2, 3, 4, 5, 6, 7], 12, true, true);
 	tree.cutAnim = tree.animations.add('cut');
 	var cutCompleted = function() {
 	    tree.animations.play('swing');
@@ -157,7 +157,7 @@ function create() {
 	tree.animations.play('swing');
 
 	village01 = game.add.sprite(2472,921, 'village01');
-	//village01.animations.add('move_1', [0, 1], 3/*속도*/, true, true);
+	village01.animations.add('move_1', [0, 1], 3/*속도*/, true, true);
 	village01.moveAnim = village01.animations.add('move_2');
 	var move_1Completed = function() {
 	    village01.animations.play('move_1');
@@ -212,7 +212,7 @@ function create() {
 
 	cow.inputEnabled = true;
 	cow.events.onInputDown.add(cowClick0, this);
-	//cow.animations.play('eat');
+	cow.animations.play('eat');
 	cow2 = game.add.sprite(1960,708, 'cow2');
 
 	streetlamp[0] = game.add.sprite(2908,746, 'streetlamp');
@@ -253,7 +253,7 @@ function create() {
 	airballoon.events.onInputDown.add(airballoonClick, this);
 
 	crane = game.add.sprite(1250, 500, 'crane'); //크레인
-	//crane.animations.add('moving', [0, 1, 2, 3, 4, 5, 6,7,8,9,10,11,12,13,14,15,16], 10/*속도*/, true, true);
+	crane.animations.add('moving', [0, 1, 2, 3, 4, 5, 6,7,8,9,10,11,12,13,14,15,16], 10/*속도*/, true, true);
 	crane.movingAnim = crane.animations.add('moving2');
 	var movingCompleted = function() {
 	    crane.animations.play('moving');
