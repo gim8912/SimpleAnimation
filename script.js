@@ -129,14 +129,6 @@ function create() {
 }
 function update() {	
 
-	if(train.x === -600){
-		train.x=3840;
-		game.add.tween(train).to( { x: '-840' }, 1000, Phaser.Easing.Linear.None, true);
-	}
-	if(truck.x === -200){
-		truck.x=3840;
-		game.add.tween(truck).to( { x: '-2296' }, 4000, Phaser.Easing.Linear.None, true);
-	}
 }
 function cowClick() {
 	cow.animations.play('walk', 10, false);	
