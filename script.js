@@ -87,8 +87,8 @@ function create() {
 	//강승화 생성
 
 	sea = game.add.sprite(0,1491, 'sea');
-	sea.animations.add('searun');
-	sea.animations.play('searun', 7, true);
+	//sea.animations.add('searun');
+	//sea.animations.play('searun', 7, true);
 
 	farm= game.add.sprite(738,1041, 'farm');
 	
@@ -109,7 +109,7 @@ function create() {
 	house02= game.add.sprite(2472,921, 'house02');
 	
 	tractor = game.add.sprite(900, 1080, 'tractor'); // 트렉터
-	tractor.animations.add('move', [0, 1, 2, 3, 4, 5, 6], 11/*속도*/, true, true);
+	//tractor.animations.add('move', [0, 1, 2, 3, 4, 5, 6], 11/*속도*/, true, true);
 	tractor.moveAnim = tractor.animations.add('move2');
 	var moveCompleted = function() {
 	    tractor.animations.play('move');
@@ -144,7 +144,7 @@ function create() {
 	lift.events.onInputDown.add(liftClick, this);
 
 	tree = game.add.sprite(300, 1050, 'tree');
-	tree.animations.add('swing', [0, 1, 2, 3, 4, 5, 6, 7], 12, true, true);
+	//tree.animations.add('swing', [0, 1, 2, 3, 4, 5, 6, 7], 12, true, true);
 	tree.cutAnim = tree.animations.add('cut');
 	var cutCompleted = function() {
 	    tree.animations.play('swing');
@@ -155,7 +155,7 @@ function create() {
 	tree.animations.play('swing');
 
 	village01 = game.add.sprite(2472,921, 'village01');
-	village01.animations.add('move_1', [0, 1], 3/*속도*/, true, true);
+	//village01.animations.add('move_1', [0, 1], 3/*속도*/, true, true);
 	village01.moveAnim = village01.animations.add('move_2');
 	var move_1Completed = function() {
 	    village01.animations.play('move_1');
@@ -201,7 +201,7 @@ function create() {
 	bg= game.add.sprite(866, 819, 'bg_construction1');
 
 	cow = game.add.sprite(1948,640, 'cow');
-	cow.animations.add('eat', [0,1,2,3,4,5], 9, true, true );
+	//cow.animations.add('eat', [0,1,2,3,4,5], 9, true, true );
 	cow.walkAnim = cow.animations.add('walk',[6,7,8,9],9,true,true);
 	var walkCompleted = function(){
 		cow.animations.play('eat');
@@ -210,7 +210,7 @@ function create() {
 
 	cow.inputEnabled = true;
 	cow.events.onInputDown.add(cowClick0, this);
-	cow.animations.play('eat');
+	//cow.animations.play('eat');
 	cow2 = game.add.sprite(1960,708, 'cow2');
 
 	streetlamp[0] = game.add.sprite(2908,746, 'streetlamp');
@@ -218,8 +218,8 @@ function create() {
 	streetlamp[0].animations.play('lamp', 5, true);
 
 	windmill = game.add.sprite(2036,400, 'windmill');
-	windmill.animations.add('spin');
-	windmill.animations.play('spin', 5, true);
+	//windmill.animations.add('spin');
+	//windmill.animations.play('spin', 5, true);
 
 	/*추가 이미지*/
 	circle = game.add.sprite(3242,584, 'circle');
