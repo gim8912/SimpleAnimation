@@ -121,20 +121,22 @@ function create() {
 
 
 	birds[0] = game.add.sprite(790,1330, 'bird');
-	birds[0].animations.add('fly');
-	birds[0].animations.play('fly', 10/*속도조절*/, true);
+	//birds[0].animations.add('fly');
+	//birds[0].animations.play('fly', 10/*속도조절*/, true);
+	
 	//bird.inputEnabled = true;
 	//bird.events.onInputDown.add(birdClick, this);
 
 	birds[1] = game.add.sprite(900,1000, 'bird');
-	birds[1].animations.add('fly');
-	birds[1].animations.play('fly', 10/*속도조절*/, true);
+	//birds[1].animations.add('fly');
+	//birds[1].animations.play('fly', 10/*속도조절*/, true);
+	
 	//bird.inputEnabled = true;
 	//bird.events.onInputDown.add(birdClick, this);
 
 	birds[2] = game.add.sprite(400,1500, 'bird');
-	birds[2].animations.add('fly');
-	birds[2].animations.play('fly', 10/*속도조절*/, true);
+//	birds[2].animations.add('fly');
+//	birds[2].animations.play('fly', 10/*속도조절*/, true);
 	//bird.inputEnabled = true;
 	//bird.events.onInputDown.add(birdClick, this);
 
@@ -251,7 +253,7 @@ function create() {
 	airballoon.events.onInputDown.add(airballoonClick, this);
 
 	crane = game.add.sprite(1250, 500, 'crane'); //크레인
-	crane.animations.add('moving', [0, 1, 2, 3, 4, 5, 6,7,8,9,10,11,12,13,14,15,16], 10/*속도*/, true, true);
+	//crane.animations.add('moving', [0, 1, 2, 3, 4, 5, 6,7,8,9,10,11,12,13,14,15,16], 10/*속도*/, true, true);
 	crane.movingAnim = crane.animations.add('moving2');
 	var movingCompleted = function() {
 	    crane.animations.play('moving');
