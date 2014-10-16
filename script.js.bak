@@ -86,9 +86,7 @@ function create() {
 	
 	//강승화 생성
 
-	sea = game.add.sprite(0,1491, 'sea');
-	sea.animations.add('searun');
-	sea.animations.play('searun', 7, true);
+
 
 	farm= game.add.sprite(738,1041, 'farm');
 	
@@ -104,6 +102,9 @@ function create() {
 	truck.events.onInputDown.add(truckClick, this);
 
 	bg= game.add.sprite(0,0, 'bg02'); // 트럭과 기차를 위한 이미지
+	sea = game.add.sprite(0,1491, 'sea');
+	sea.animations.add('searun');
+	sea.animations.play('searun', 7, true);
 
 	house01= game.add.sprite(1323,999, 'house01');
 	house02= game.add.sprite(2472,921, 'house02');
