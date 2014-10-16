@@ -1,3 +1,4 @@
+var socket;
 var game = new Phaser.Game(3840, 2160, Phaser.AUTO, '',
           {preload: preload, create: create, update: update});
 var bg;
@@ -378,3 +379,12 @@ function truckClick() {
   //.to({ x: 000, y: 1380}, 2000, phaser.Easing.Linear.None)
   //.loop()
   //.start();
+
+
+window.onload = function() {
+  socket = io();
+  socket.on('touch', function(point){
+    truckClick();
+    console.log(point);
+  });
+}

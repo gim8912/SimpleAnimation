@@ -14,7 +14,7 @@ app.get('/touch', function(req, res) {
   var point = {};
   point.x = req.query.x;
   point.y = req.query.y;
-  io.emit('click', point);
+  io.emit('touch', point);
 
 });
 
