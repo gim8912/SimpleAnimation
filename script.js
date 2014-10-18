@@ -5,14 +5,15 @@ var bg;
 var bg01;
 var bg02;
 var bg03;
-var cow;
+var cow = [];
+var cow2 = [];
 
 //// 강승화
 
 var tractor;
 var birds = [];
 var lift;
-var tree;
+var tree = [];
 var train;
 var house01;
 var crane;
@@ -34,7 +35,9 @@ var circle;
 var trapeze;
 var clock_tower;
 var airballoon;
-
+var cowEmitter;
+var restaurant;
+var farmcar;
 
 function preload() {
 	game.load.spritesheet('cow', 'assets/cow.png',100 , 50);
@@ -49,7 +52,7 @@ function preload() {
 	game.load.spritesheet('tree', 'assets/tree01.png', 184,159);
 	game.load.spritesheet('train', 'assets/train.png', 551,72);
 	game.load.image('house01', 'assets/house01.png');
-	game.load.image('house02', 'assets/house02.png');
+	
 	game.load.spritesheet('crane', 'assets/crane.png', 309/*width*/,318/*height*/);
 	game.load.spritesheet('village01', 'assets/village01.png', 371/*width*/,422/*height*/);
 	game.load.spritesheet('snow', 'assets/snow.png', 8/*width*/,8/*height*/);
@@ -78,6 +81,10 @@ function preload() {
 	game.load.image('bg_farm1', 'assets/bg_farm1.png');
 	game.load.image('bg_construction2', 'assets/bg_construction2.png');
 	game.load.image('bg_construction1', 'assets/bg_construction1.png');
+
+	//
+	game.load.image('restaurant', 'assets/restaurant.png');
+	game.load.spritesheet('farmcar', 'assets/farmcar.png', 48, 120); 
 	
 }
 function create() {
@@ -107,8 +114,10 @@ function create() {
 	bg= game.add.sprite(0,0, 'bg02'); // 트럭과 기차를 위한 이미지
 
 	house01= game.add.sprite(1323,999, 'house01');
-	house02= game.add.sprite(2472,921, 'house02');
 	
+
+	
+
 	tractor = game.add.sprite(900, 1080, 'tractor'); // 트렉터
 	tractor.animations.add('move', [0, 1, 2, 3, 4, 5, 6], 11/*속도*/, true, true);
 	tractor.moveAnim = tractor.animations.add('move2');
@@ -144,16 +153,31 @@ function create() {
 	lift.inputEnabled = true;
 	lift.events.onInputDown.add(liftClick, this);
 
-	tree = game.add.sprite(300, 1050, 'tree');
-	tree.animations.add('swing', [0, 1, 2, 3, 4, 5, 6, 7], 12, true, true);
-	tree.cutAnim = tree.animations.add('cut');
-	var cutCompleted = function() {
-	    tree.animations.play('swing');
-	}
-	tree.cutAnim.onComplete.add(cutCompleted, this);
-	tree.inputEnabled = true;
-	tree.events.onInputDown.add(treeClick, this);
-	tree.animations.play('swing');
+	
+	treeAnimation(0,0,500);
+	treeAnimation(1,100,500);
+	treeAnimation(2,200,500);
+	treeAnimation(3,300,500);
+
+	treeAnimation(4,40,650);
+	treeAnimation(5,140,650);
+	treeAnimation(6,240,650);
+	treeAnimation(7,340,650);
+	treeAnimation(8,440,650);
+	
+	treeAnimation(9,-15,800);
+	treeAnimation(10,85,800);
+	treeAnimation(11,185,800);
+	treeAnimation(12,285,800);
+
+	treeAnimation(13,40,1000);
+	treeAnimation(14,140,1000);
+
+	treeAnimation(15,-30,1150);
+	treeAnimation(16,70,1150);
+	treeAnimation(17,170,1150);	
+	treeAnimation(18,270,1150);
+	treeAnimation(19,370,1150);
 
 	village01 = game.add.sprite(2472,921, 'village01');
 	village01.animations.add('move_1', [0, 1], 3/*속도*/, true, true);
@@ -201,18 +225,8 @@ function create() {
 	bg= game.add.sprite(866, 423, 'bg_construction2');
 	bg= game.add.sprite(866, 819, 'bg_construction1');
 
-	cow = game.add.sprite(1948,640, 'cow');
-	cow.animations.add('eat', [0,1,2,3,4,5], 9, true, true );
-	cow.walkAnim = cow.animations.add('walk',[6,7,8,9],9,true,true);
-	var walkCompleted = function(){
-		cow.animations.play('eat');
-	}
-	cow.walkAnim.onComplete.add(walkCompleted, this);
 
-	cow.inputEnabled = true;
-	cow.events.onInputDown.add(cowClick0, this);
-	cow.animations.play('eat');
-	cow2 = game.add.sprite(1960,708, 'cow2');
+	
 
 	streetlamp[0] = game.add.sprite(2908,746, 'streetlamp');
 	streetlamp[0].animations.add('lamp');
@@ -252,7 +266,7 @@ function create() {
 	airballoon.events.onInputDown.add(airballoonClick, this);
 
 	crane = game.add.sprite(1250, 500, 'crane'); //크레인
-	crane.animations.add('moving', [0, 1, 2, 3, 4, 5, 6,7,8,9,10,11,12,13,14,15,16], 10/*속도*/, true, true);
+	//crane.animations.add('moving', [0, 1, 2, 3, 4, 5, 6,7,8,9,10,11,12,13,14,15,16], 10/*속도*/, true, true);
 	crane.movingAnim = crane.animations.add('moving2');
 	var movingCompleted = function() {
 	    crane.animations.play('moving');
@@ -261,6 +275,21 @@ function create() {
 	crane.inputEnabled = true;
 	crane.events.onInputDown.add(craneClick, this);
 	crane.animations.play('moving');
+
+	restaurant= game.add.sprite(2470,465, 'restaurant');
+	
+	farmcar = game.add.sprite(1670,576, 'farmcar');
+	farmcar.animations.add('farmcar_play',[0, 1, 2, 3, 4, 5, 6,7,8,9,10,11,12,13],5,true,true);
+	farmcar.animations.play('farmcar_play');
+	
+	cowAnimation(0,1977,640);
+	cowAnimation(1,2150,730);
+	cowAnimation(2,2250,830);
+	cowAnimation(3,1870,810);
+
+	cowAnimation2(0,1960,708);
+	cowAnimation2(1,2260,750);
+	cowAnimation2(2,2060,840);
 
 }
 function update() {	
@@ -312,9 +341,7 @@ function update() {
 function liftClick() {
 	lift.animations.play('swing', 8, false);
 }
-function treeClick() {
-	tree.animations.play('cut', 16, false);
-}
+
 function trainClick() {
 	train.animations.play('shiny', 8, false);
 	if (train.x === 3000)
@@ -342,10 +369,7 @@ function parsil5Click() {
 }
 
 //주란 함수
-function cowClick0() {
-	birds[0].wander.start();
-	cow.animations.play('walk',6,false);
-}
+
 function seesawClick() {
 	seesaw.animations.play('seesaw_play',16,false);
 }
@@ -370,7 +394,84 @@ function truckClick() {
 	}
 }
 
+var cowAnimation = function(a, x, y){
+	cow[a] = game.add.sprite(x,y, 'cow');
+	cow[a].anchor.x = 0.5;
+	cow[a].anchor.y = 0.5;
+	cow[a].animations.add('eat', [0,1,2,3,4,5]);
+	cow[a].animations.add('walk', [6,7,8,9] );
 
+	var cowDown = function() {
+		game.add.tween(cow[a].scale).to({x:4,y:4},1000,Phaser.Easing.Elastic.Out,true);
+		// cow.scale.x = 4;
+		// cow.scale.y = 4;
+		cow[a].animations.play('walk', 9, true);
+	}
+
+	var cowUp = function() {
+		game.add.tween(cow[a].scale).to({x:1,y:1},1000,Phaser.Easing.Elastic.Out,true);
+
+		// cow.scale.x = 1;
+		// cow.scale.y = 1;
+		cow[a].animations.play('eat', 9, true);
+	}
+
+
+	cow[a].inputEnabled = true;
+	cow[a].input.enableDrag(true);
+	cow[a].events.onInputDown.add(cowDown, this);
+	cow[a].events.onInputUp.add(cowUp, this);
+	cow[a].animations.play('eat', 9, true);
+}
+
+var cowAnimation2 = function(a, x, y){
+	cow2[a] = game.add.sprite(x,y, 'cow2');
+	cow2[a].anchor.x = 0.5;
+	cow2[a].anchor.y = 0.5;
+	cow2[a].animations.add('eat2', [0,1,2,3,4,5]);
+	cow2[a].animations.add('walk2', [6,7,8,9,10,11] );
+
+	var cowDown2 = function() {
+		game.add.tween(cow2[a].scale).to({x:4,y:4},1000,Phaser.Easing.Elastic.Out,true);
+		// cow.scale.x = 4;
+		// cow.scale.y = 4;
+		cow2[a].animations.play('walk2', 9, true);
+	}
+
+	var cowUp2 = function() {
+		game.add.tween(cow2[a].scale).to({x:1,y:1},1000,Phaser.Easing.Elastic.Out,true);
+
+		// cow.scale.x = 1;
+		// cow.scale.y = 1;
+		cow2[a].animations.play('eat2', 9, true);
+	}
+
+
+	cow2[a].inputEnabled = true;
+	cow2[a].input.enableDrag(true);
+	cow2[a].events.onInputDown.add(cowDown2, this);
+	cow2[a].events.onInputUp.add(cowUp2, this);
+	cow2[a].animations.play('eat2', 9, true);
+}
+
+var treeAnimation = function(a, x, y){
+	
+	tree[a] = game.add.sprite(x, y, 'tree');
+	tree[a].animations.add('swing', [0, 1, 2, 3, 4, 5, 6, 7], 7, true, true);
+	tree[a].cutAnim = tree[a].animations.add('cut');
+	var cutCompleted = function() {
+	    tree[a].animations.play('swing');
+	}
+	tree[a].cutAnim.onComplete.add(cutCompleted, this);
+	tree[a].inputEnabled = true;
+	tree[a].events.onInputDown.add(treeClick, this);
+	tree[a].animations.play('swing');
+
+	function treeClick() {
+		tree[a].animations.play('cut', 16, false);
+	}
+
+}
 //승훈 함수
 
 //트윈애니메이션(왔다갔다)
