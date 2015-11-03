@@ -19,7 +19,7 @@
 		cow2[a].animations.play('eat2', 9, true);
 	}
 
-
+ 
 	cow2[a].inputEnabled = true;
 	cow2[a].input.enableDrag(true);
 	cow2[a].events.onInputDown.add(cowDown2, this);
